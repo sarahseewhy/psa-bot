@@ -8,9 +8,14 @@ get '/psa' do
 end
 
 def postback message, channel
-    # sanity check endpoint is available
-    # send_file 'public/index.html'
-
     slack_webhook = ENV['SLACK_WEBHOOK_URL']
-    HTTParty.post slack_webhook, body: {"text" => message.to_s, "username" => "psa", "channel" => params[:channel_id]}.to_json, headers: {'content-type' => 'application/json'}
+    HTTParty.post slack_webhook,
+    body: {
+      "text" => message.to_s,
+      "username" => "psa",
+      "channel" => params[:channel_id]
+    }.to_json,
+    headers: {
+        'content-type' => 'application/json'
+    }
 end
